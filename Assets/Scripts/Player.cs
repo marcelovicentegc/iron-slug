@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +26,13 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!isDead) {
-			isOnLand = Physics2D.linecast(transform.position, landCheck.position, 1 << LayerMask.NameToLayer("Land"));
+			isOnLand = Physics2D.Linecast(transform.position, landCheck.position, 1 << LayerMask.NameToLayer("Land"));
 
-			if (input.GetButtonDown("Jump") && isOnLand) {
+			if (Input.GetButtonDown("Jump") && isOnLand) {
 				jump = true;
 			} else if (Input.GetButtonUp("Jump")) {
 				if (rb2d.velocity.y > 0) {
-					rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y * 0.5);
+					rb2d.velocity = new Vector2(rb2d.velocity.x, Convert.ToSingle(rb2d.velocity.y * 0.5));
 				};
 			}
 		}
